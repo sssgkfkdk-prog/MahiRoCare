@@ -151,7 +151,7 @@ export default function ServicesPage() {
                     <input 
                       required
                       type="text" 
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                      className="w-full px-4 py-3 bg-slate-50 text-slate-900 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                       value={formData.name}
                       onChange={e => setFormData({...formData, name: e.target.value})}
                     />
@@ -161,7 +161,7 @@ export default function ServicesPage() {
                     <input 
                       required
                       type="tel" 
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                      className="w-full px-4 py-3 bg-slate-50 text-slate-900 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                       value={formData.phone}
                       onChange={e => setFormData({...formData, phone: e.target.value})}
                     />
@@ -172,7 +172,7 @@ export default function ServicesPage() {
                   <label className="block text-sm font-medium text-slate-700 mb-1">Email Address (Optional)</label>
                   <input 
                     type="email" 
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                     value={formData.email}
                     onChange={e => setFormData({...formData, email: e.target.value})}
                   />
@@ -184,7 +184,7 @@ export default function ServicesPage() {
                     <div className="relative">
                       <select 
                         required
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition appearance-none"
+                        className="w-full px-4 py-3 bg-slate-50 text-slate-900 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition appearance-none"
                         value={formData.serviceType}
                         onChange={e => setFormData({...formData, serviceType: e.target.value})}
                       >
@@ -201,7 +201,7 @@ export default function ServicesPage() {
                     <input 
                       required
                       type="date" 
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                      className="w-full px-4 py-3 bg-slate-50 text-slate-900 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                       value={formData.preferredDate}
                       onChange={e => setFormData({...formData, preferredDate: e.target.value})}
                     />
@@ -213,7 +213,7 @@ export default function ServicesPage() {
                   <textarea 
                     required
                     rows="2"
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                     value={formData.address}
                     onChange={e => setFormData({...formData, address: e.target.value})}
                   ></textarea>
@@ -224,7 +224,7 @@ export default function ServicesPage() {
                   <textarea 
                     rows="3"
                     placeholder="e.g., Leaking water, strange taste, or routine checkup required..."
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                     value={formData.issueDescription}
                     onChange={e => setFormData({...formData, issueDescription: e.target.value})}
                   ></textarea>

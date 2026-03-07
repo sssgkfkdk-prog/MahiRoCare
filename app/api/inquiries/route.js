@@ -64,6 +64,6 @@ export async function POST(req) {
     return NextResponse.json(inquiry, { status: 201 });
   } catch (error) {
     console.error('Service Inquiry Error:', error);
-    return NextResponse.json({ error: 'Failed to submit inquiry' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Failed to submit inquiry', stack: error.stack }, { status: 500 });
   }
 }

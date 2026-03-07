@@ -7,8 +7,8 @@ import ServiceInquiry from '@/lib/models/ServiceInquiry';
 import Product from '@/lib/models/Product';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Package, Wrench, Calendar, Watch, CheckCircle, Clock } from 'lucide-react';
 import Link from 'next/link';
+import { Package, Wrench, Calendar, Watch, CheckCircle, Clock } from 'lucide-react';
 
 // Helper component for status badges
 const StatusBadge = ({ status }) => {

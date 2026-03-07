@@ -29,7 +29,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li><Link href="/services" className="text-slate-400 hover:text-white transition">Domestic RO Repair</Link></li>
               <li><Link href="/services" className="text-slate-400 hover:text-white transition">Commercial RO Installation</Link></li>
-              <li><Link href="/services" className="text-slate-400 hover:text-white transition">AMC Plans</Link></li>
+              <li><Link href="/amc" className="text-slate-400 hover:text-white transition">AMC Plans</Link></li>
               <li><Link href="/services" className="text-slate-400 hover:text-white transition">Filter Replacement</Link></li>
             </ul>
           </div>

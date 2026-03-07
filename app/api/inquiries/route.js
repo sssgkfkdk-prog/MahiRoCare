@@ -4,13 +4,6 @@ import ServiceInquiry from '@/lib/models/ServiceInquiry';
 import Subscription from '@/lib/models/Subscription';
 import webpush from 'web-push';
 
-// Configure Web Push with VAPID keys
-webpush.setVapidDetails(
-  process.env.VAPID_SUBJECT,
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
-  process.env.VAPID_PRIVATE_KEY
-);
-
 export async function POST(req) {
   try {
     await dbConnect();
@@ -25,10 +18,18 @@ export async function POST(req) {
 
     // --- Send Push Notifications to Admins ---
     try {
-      // Find all subscriptions for admins (where userId is null for hardcoded admin or find admin users)
-      const adminSubscriptions = await Subscription.find({}); 
+      if (process.env.VAPID_SUBJECT && process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
+        // Configure Web Push with VAPID keys
+        webpush.setVapidDetails(
+          process.env.VAPID_SUBJECT,
+          process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
+          process.env.VAPID_PRIVATE_KEY
+        );
+        
+        // Find all subscriptions for admins (where userId is null for hardcoded admin or find admin users)
+        const adminSubscriptions = await Subscription.find({}); 
 
-      const notificationPayload = JSON.stringify({
+        const notificationPayload = JSON.stringify({
         title: 'New Service Booking! 💧',
         body: `${body.name} requested a ${body.serviceType} RO service at ${body.address}.`,
         url: '/admin/inquiries'
@@ -51,7 +52,10 @@ export async function POST(req) {
         })
       );
 
-      await Promise.all(pushPromises);
+        await Promise.all(pushPromises);
+      } else {
+        console.warn("Skipping Push Notifications: VAPID keys are completely missing from environment variables.");
+      }
     } catch (pushError) {
       console.error('Error sending push notifications:', pushError);
       // We don't want to fail the inquiry creation if push fails

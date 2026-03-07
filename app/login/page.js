@@ -246,8 +246,8 @@ function LoginContent() {
                     {authStep === 'login' && (
                       <button 
                         type="button"
-                        onClick={() => setAuthStep('forgot')}
-                        className="text-xs text-blue-600 hover:underline"
+                        onClick={() => switchMode('forgot')}
+                        className="text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-colors"
                       >
                         Forgot password?
                       </button>

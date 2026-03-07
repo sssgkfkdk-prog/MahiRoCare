@@ -54,8 +54,8 @@ export default function LoginPage() {
       
       const data = await res.json();
       if (!res.ok) {
-        const errorMsg = data.details || 'Unknown server error';
-        alert(`REGISTRATION FAILED\n\nError: ${data.error}\nReason: ${errorMsg}\n\nPlease check your SendGrid "From Email" verification.`);
+        const errorMsg = data.details || 'Check SendGrid From Email settings';
+        alert(`CRITICAL ERROR: ${data.error}\n\nDETAILED REASON: ${errorMsg}\n\nPLEASE VERIFY: Is ${email} verified in SendGrid as a Sender?`);
         setLoading(false);
         return;
       }

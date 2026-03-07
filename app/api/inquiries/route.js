@@ -4,6 +4,8 @@ import ServiceInquiry from '@/lib/models/ServiceInquiry';
 import Subscription from '@/lib/models/Subscription';
 import webpush from 'web-push';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req) {
   try {
     await dbConnect();
@@ -64,6 +66,11 @@ export async function POST(req) {
     return NextResponse.json(inquiry, { status: 201 });
   } catch (error) {
     console.error('Service Inquiry Error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to submit inquiry', stack: error.stack }, { status: 500 });
+    return NextResponse.json({ 
+       error: 'CRASHED', 
+       realError: String(error), 
+       message: error.message,
+       stack: error.stack
+    }, { status: 500 });
   }
 }

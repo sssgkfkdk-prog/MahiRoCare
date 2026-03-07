@@ -2,6 +2,7 @@
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 import { Award, Users, Wrench, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import * as motion from 'framer-motion/client';
 

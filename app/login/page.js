@@ -10,6 +10,9 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 
 export default function LoginPage() {
+  useEffect(() => {
+    console.log('LoginPage Version: 2.0.debug');
+  }, []);
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -51,7 +54,8 @@ export default function LoginPage() {
       
       const data = await res.json();
       if (!res.ok) {
-        alert(`${data.error}${data.details ? ': ' + data.details : ''}`);
+        const errorMsg = data.details || 'No details provided by server';
+        alert(`${data.error}: ${errorMsg}`);
         setLoading(false);
         return;
       }

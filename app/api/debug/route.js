@@ -2,14 +2,13 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   return NextResponse.json({
-    node_env: process.env.NODE_ENV,
-    has_nextauth_url: !!process.env.NEXTAUTH_URL,
-    nextauth_url_value: process.env.NEXTAUTH_URL?.substring(0, 15) + '...',
-    has_nextauth_secret: !!process.env.NEXTAUTH_SECRET,
-    has_google_clientId: !!process.env.GOOGLE_CLIENT_ID,
-    has_google_secret: !!process.env.GOOGLE_CLIENT_SECRET,
-    has_mongo_uri: !!process.env.MONGODB_URI,
-    mongo_prefix: process.env.MONGODB_URI?.substring(0, 15) + '...',
-    time: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    version: '2.0.debug', // Increment this if needed
+    config: {
+      hasSendgridKey: !!process.env.SENDGRID_API_KEY,
+      sendgridKeyPrefix: process.env.SENDGRID_API_KEY ? process.env.SENDGRID_API_KEY.substring(0, 5) : 'none',
+      hasFromEmail: !!process.env.SENDGRID_FROM_EMAIL,
+      fromEmail: process.env.SENDGRID_FROM_EMAIL || 'none'
+    }
   });
 }

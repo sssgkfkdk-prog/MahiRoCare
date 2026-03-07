@@ -51,7 +51,7 @@ export default function LoginPage() {
       
       const data = await res.json();
       if (!res.ok) {
-        alert(data.error || 'Failed to send OTP');
+        alert(`${data.error}${data.details ? ': ' + data.details : ''}`);
         setLoading(false);
         return;
       }

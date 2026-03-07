@@ -2,63 +2,49 @@ import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import Link from 'next/link';
+import AdminSidebar from '@/components/AdminSidebar';
 import AdminNotificationManager from '@/components/AdminNotificationManager';
 
 export default async function AdminLayout({ children }) {
   const session = await getServerSession(authOptions);
 
   if (!session || session.user.role !== 'admin') {
-    redirect('/login'); // Redirect non-admins to login
+    redirect('/login');
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r">
-        <div className="h-full flex flex-col">
-          <div className="h-16 flex items-center px-6 border-b">
-            <h1 className="text-xl font-bold text-slate-800">Admin Panel</h1>
+    <div className="min-h-screen bg-[#F8FAFC] flex font-sans">
+      {/* Sidebar Component */}
+      <AdminSidebar user={session.user} />
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Top Header */}
+        <header className="h-20 bg-white/80 backdrop-blur-md border-b border-slate-100 flex items-center justify-between px-8 sticky top-0 z-40">
+           <div className="flex items-center gap-4">
+              <div className="h-8 w-1 bg-blue-600 rounded-full"></div>
+              <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Mahi RO Admin</h2>
+           </div>
+           
+           <div className="flex items-center gap-6">
+              <div className="hidden md:flex flex-col text-right">
+                 <span className="text-sm font-black text-slate-900 leading-tight">{session.user.name || 'Admin User'}</span>
+                 <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Master Access</span>
+              </div>
+              <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/20">
+                 {session.user.name?.charAt(0) || 'A'}
+              </div>
+           </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto p-8 lg:p-12">
+          <div className="max-w-7xl mx-auto">
+            {children}
           </div>
-          <nav className="flex-1 py-4">
-            <ul className="space-y-1">
-              <li>
-                <Link href="/admin" className="block px-6 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors">
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/products" className="block px-6 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors">
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/orders" className="block px-6 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors">
-                  Orders
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/inquiries" className="block px-6 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors">
-                  Service Inquiries
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/customers" className="block px-6 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors">
-                  Customers
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </aside>
+        </main>
+      </div>
 
-      {/* Main Content */}
-      <main className="flex-1 p-8">
-        <div className="max-w-6xl mx-auto">
-          {children}
-        </div>
-      </main>
-
-      {/* Global Admin Notifications */}
+      {/* Global Admin Notifications with Sound */}
       <AdminNotificationManager />
     </div>
   );

@@ -5,6 +5,7 @@ import { ShoppingCart, Menu, X, User, LogOut, LayoutDashboard } from 'lucide-rea
 import { useState } from 'react';
 import { useCart } from './CartProvider';
 import { useSession, signOut } from 'next-auth/react';
+import ProfileDropdown from './ProfileDropdown';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,25 +29,7 @@ export default function Navbar() {
             <div className="flex items-center space-x-4 border-l pl-4 border-slate-200">
               
               {session ? (
-                <div className="flex items-center space-x-3">
-                   <Link 
-                     href={session.user?.role === 'admin' ? '/admin' : '/dashboard'} 
-                     className="text-slate-600 hover:text-blue-600 transition flex items-center gap-1"
-                     title="Dashboard"
-                   >
-                     <LayoutDashboard size={20} />
-                     <span className="text-sm font-medium hidden lg:block">
-                       {session.user?.name ? session.user.name.split(' ')[0] : 'Panel'}
-                     </span>
-                   </Link>
-                   <button 
-                     onClick={() => signOut({ callbackUrl: '/' })} 
-                     className="text-slate-400 hover:text-red-500 transition"
-                     title="Logout"
-                   >
-                     <LogOut size={20} />
-                   </button>
-                </div>
+                <ProfileDropdown />
               ) : (
                 <Link href="/login" className="text-slate-600 hover:text-blue-600 transition flex items-center gap-1">
                   <User size={20} />

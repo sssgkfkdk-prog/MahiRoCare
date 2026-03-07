@@ -19,22 +19,22 @@ export default function ContactPage() {
                <div className="space-y-6">
                  <div>
                    <h4 className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Office Address</h4>
-                   <p className="text-sm font-medium">123 Waterway Plaza, Main Tech Hub, City - 110001</p>
+                   <p className="text-sm font-medium">612/292 nirala marg daraganj<br/>prayagraj 211006, uttar pradesh</p>
                  </div>
                  
                  <div>
                    <h4 className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Call Us</h4>
-                   <p className="text-sm font-medium">+91 98765 43210</p>
+                   <p className="text-sm font-medium">+91 95801 75145</p>
                  </div>
                  
                  <div>
                    <h4 className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Email Support</h4>
-                   <p className="text-sm font-medium">support@mahi-ro-care.com</p>
+                   <p className="text-sm font-medium">businesswithmahirocare@gmail.com</p>
                  </div>
                  
                  <div>
                    <h4 className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Working Hours</h4>
-                   <p className="text-sm font-medium">Mon - Sat: 9:00 AM - 6:00 PM</p>
+                   <p className="text-sm font-medium">Mon - Sat: 9:00 AM - 7:00 PM</p>
                  </div>
                </div>
             </div>

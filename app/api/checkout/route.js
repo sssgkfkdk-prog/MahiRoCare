@@ -17,8 +17,8 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
     }
 
-    // Determine the amount in paise (Razorpay standard)
-    const amountInPaise = amount * 100;
+    // Determine the amount in paise (Razorpay standard). Make sure to round to avoid float errors.
+    const amountInPaise = Math.round(amount * 100);
 
     // Create order in Razorpay
     let razorpayOrderId = null;

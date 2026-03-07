@@ -39,15 +39,15 @@ export default function Footer() {
             <ul className="space-y-3 text-slate-400">
               <li className="flex items-start">
                 <span className="mr-2">📍</span>
-                <span>123 Waterway Plaza, Main Tech Hub, City - 110001</span>
+                <span>612/292 nirala marg daraganj prayagraj 211006</span>
               </li>
               <li className="flex items-center">
                 <span className="mr-2">📞</span>
-                <span>+91 98765 43210</span>
+                <span>+91 95801 75145</span>
               </li>
               <li className="flex items-center">
                 <span className="mr-2">✉️</span>
-                <span>support@mahi-ro-care.com</span>
+                <span>businesswithmahirocare@gmail.com</span>
               </li>
             </ul>
           </div>

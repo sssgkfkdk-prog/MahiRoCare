@@ -28,10 +28,10 @@ export function CartProvider({ children }) {
 
   const addToCart = (product) => {
     setCart(prev => {
-      const existing = prev.find(item => item._id === product._id);
+      const existing = prev.find(item => String(item._id) === String(product._id));
       if (existing) {
         return prev.map(item => 
-          item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
+          String(item._id) === String(product._id) ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
       return [...prev, { ...product, quantity: 1 }];
@@ -39,17 +39,25 @@ export function CartProvider({ children }) {
   };
 
   const removeFromCart = (productId) => {
-    setCart(prev => prev.filter(item => item._id !== productId));
+    setCart(prev => prev.filter(item => String(item._id) !== String(productId)));
   };
 
   const updateQuantity = (productId, delta) => {
-    setCart(prev => prev.map(item => {
-      if (item._id === productId) {
-         const newQ = item.quantity + delta;
-         return newQ > 0 ? { ...item, quantity: newQ } : item;
+    setCart(prev => {
+      const newCart = [];
+      for (const item of prev) {
+        if (String(item._id) === String(productId)) {
+          const newQ = item.quantity + delta;
+          if (newQ > 0) {
+            newCart.push({ ...item, quantity: newQ });
+          }
+          // If newQ <= 0, we don't push it (meaning it gets removed)
+        } else {
+          newCart.push(item);
+        }
       }
-      return item;
-    }));
+      return newCart;
+    });
   };
 
   const clearCart = () => {

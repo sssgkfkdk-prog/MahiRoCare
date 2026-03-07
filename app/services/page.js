@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import Script from 'next/script';
+import { useRouter } from 'next/navigation';
 import { ArrowRight, CheckCircle, ShieldCheck, Wrench, Building } from 'lucide-react';
 import * as motion from 'framer-motion/client';
 import PremiumIndustrialRO from '@/components/PremiumIndustrialRO';
@@ -12,31 +14,71 @@ export default function ServicesPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', serviceType: 'domestic', address: '', issueDescription: '', preferredDate: ''
+    name: '', email: '', phone: '', serviceType: '', address: '', issueDescription: '', preferredDate: ''
   });
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await fetch('/api/inquiries', {
+      // 1. Initialize checkout on server
+      const res = await fetch('/api/checkout-service', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ serviceType: formData.serviceType, userEmail: formData.email })
       });
+      
+      const orderData = await res.json();
+      
+      if (!res.ok) throw new Error(orderData.error);
 
-      if (res.ok) {
-        setSuccess(true);
-        setFormData({
-            name: '', email: '', phone: '', serviceType: 'domestic', address: '', issueDescription: '', preferredDate: ''
-        });
-      } else {
-        alert('Failed to submit booking. Please try again.');
-      }
+      // 2. Open Razorpay Window
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'your_razorpay_key_id_here',
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: 'Mahi RO Care',
+        description: 'Service Booking Partial Payment',
+        order_id: orderData.id,
+        handler: async function (response) {
+          // 3. Verify Payment and Create Inquiry
+          const verifyRes = await fetch('/api/verify-service', {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                serviceData: formData
+             })
+          });
+
+          if (verifyRes.ok) {
+            setSuccess(true);
+            setFormData({
+                name: '', email: '', phone: '', serviceType: '', address: '', issueDescription: '', preferredDate: ''
+            });
+          } else {
+            alert('Payment verification failed. If money was deducted, please contact support.');
+          }
+        },
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone
+        },
+        theme: { color: '#2563eb' }
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+
     } catch (error) {
       console.error(error);
-      alert('An error occurred. Please try again later.');
+      alert('Error initiating payment process. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -45,6 +87,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50" suppressHydrationWarning>
       <Navbar />
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       <main className="flex-1">
         {/* Interactive 3D Hero Section */}
@@ -188,8 +231,13 @@ export default function ServicesPage() {
                         value={formData.serviceType}
                         onChange={e => setFormData({...formData, serviceType: e.target.value})}
                       >
-                        <option value="domestic">Domestic RO</option>
-                        <option value="commercial">Commercial RO Plant</option>
+                        <option value="" disabled>Select a service</option>
+                        <option value="Domestic RO Installation">Domestic RO Installation</option>
+                        <option value="Commercial RO Installation">Commercial RO Installation</option>
+                        <option value="Domestic RO Repair">Domestic RO Repair</option>
+                        <option value="Commercial RO Repair">Commercial RO Repair</option>
+                        <option value="Filter Replacement">Filter Replacement</option>
+                        <option value="AMC Plan">AMC (Annual Maintenance)</option>
                       </select>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                         ▼
@@ -233,11 +281,14 @@ export default function ServicesPage() {
                 <button 
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 transition transform hover:-translate-y-0.5 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 transition transform hover:-translate-y-0.5 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
                 >
-                  {loading ? 'Submitting Request...' : 'Confirm Booking'}
+                  {loading ? 'Processing...' : 'Pay ₹98.53 & Confirm Booking'}
                 </button>
-                <p className="text-xs text-center text-slate-500 mt-4">No payment required to book. Our team will provide an estimate before service.</p>
+                <div className="text-center mt-4">
+                  <p className="text-xs text-slate-500 font-medium">A partial payment of ₹98.53 (includes ₹9 GST & 0.6% platform fee) is required to confirm your booking.</p>
+                  <p className="text-xs text-slate-400 mt-1">This amount is fully refundable in case of booking cancellation.</p>
+                </div>
               </form>
             )}
           </div>

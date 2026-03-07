@@ -38,6 +38,16 @@ export async function POST(req) {
       dbUser = await User.create({ email: user.email, name: user.name || 'Guest' });
     }
 
+    // Check if there's any AMC plan in the order
+    const amcItem = items.find(item => item.category === 'AMC' || item.name.includes('AMC'));
+    if (amcItem) {
+      const expiryDate = new Date();
+      expiryDate.setFullYear(expiryDate.getFullYear() + 1); // 1 year from now
+      dbUser.amcPlan = amcItem.name;
+      dbUser.amcExpiry = expiryDate;
+      await dbUser.save();
+    }
+
     // Create Order in DB
     const newOrder = await Order.create({
       user: dbUser._id,

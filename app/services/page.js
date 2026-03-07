@@ -1,0 +1,251 @@
+'use client';
+
+import { useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import Link from 'next/link';
+import { ArrowRight, CheckCircle, ShieldCheck, Wrench, Building } from 'lucide-react';
+import * as motion from 'framer-motion/client';
+import PremiumIndustrialRO from '@/components/PremiumIndustrialRO';
+
+export default function ServicesPage() {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '', email: '', phone: '', serviceType: 'domestic', address: '', issueDescription: '', preferredDate: ''
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        setSuccess(true);
+        setFormData({
+            name: '', email: '', phone: '', serviceType: 'domestic', address: '', issueDescription: '', preferredDate: ''
+        });
+      } else {
+        alert('Failed to submit booking. Please try again.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-slate-50" suppressHydrationWarning>
+      <Navbar />
+
+      <main className="flex-1">
+        {/* Interactive 3D Hero Section */}
+        <section className="bg-slate-900 text-white min-h-[500px] relative overflow-hidden flex items-center">
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-800/80 to-blue-900/40 z-0"></div>
+          
+          {/* Custom 3D CSS Scene - Replacing broken Spline Scene */}
+          <div className="absolute inset-y-0 right-0 w-full lg:w-1/2 h-full z-0 opacity-80 mix-blend-screen flex items-center justify-center lg:justify-end pr-0 lg:pr-10 mt-20 lg:mt-0 pointer-events-none overflow-hidden">
+             <PremiumIndustrialRO />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-12 w-full py-20 pointer-events-none">
+            
+            <motion.div 
+              className="lg:w-1/2 backdrop-blur-md bg-slate-900/40 p-10 rounded-3xl border border-white/10 shadow-2xl pointer-events-auto"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <div className="inline-block px-3 py-1 mb-6 border border-cyan-500/30 rounded-full bg-cyan-500/10 text-cyan-300 font-semibold text-xs tracking-widest uppercase shadow-inner">
+                Enterprise Solutions
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Fluid Engineering</span> & Care
+              </h1>
+              <p className="text-lg text-slate-300 mb-8 max-w-xl font-light">
+                From precision domestic purifiers to massive industrial RO infrastructure. Our certified technicians maintain the lifeblood of your operation.
+              </p>
+              <div className="flex gap-4 mt-8">
+                <a href="#booking-form" className="bg-white text-slate-900 hover:bg-slate-100 font-bold py-4 px-8 rounded-xl transition-all shadow-xl hover:shadow-cyan-500/20 flex items-center gap-2">
+                  Schedule Maintenance <ArrowRight size={20} />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Included Services Features */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold text-slate-800">Our Expertise</h2>
+              <p className="mt-4 text-slate-500 text-lg">Comprehensive care for every type of purification system.</p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                 <ShieldCheck className="text-blue-600 w-12 h-12 mb-4" />
+                 <h3 className="text-xl font-bold text-slate-800 mb-2">Annual Maintenance</h3>
+                 <p className="text-slate-600">Complete AMC packages covering filters, membranes, and unlimited service visits.</p>
+              </div>
+              <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                 <Wrench className="text-blue-600 w-12 h-12 mb-4" />
+                 <h3 className="text-xl font-bold text-slate-800 mb-2">Repair & Fixes</h3>
+                 <p className="text-slate-600">Quick resolution for leaks, flow issues, weird tastes, and pump replacements.</p>
+              </div>
+              <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                 <Building className="text-blue-600 w-12 h-12 mb-4" />
+                 <h3 className="text-xl font-bold text-slate-800 mb-2">Commercial Setup</h3>
+                 <p className="text-slate-600">Installation and monthly maintenance for large capacity industrial plants.</p>
+              </div>
+            </div>
+            
+            {/* Form Section wrapper to match missing tags */}
+            <div id="booking-form" className="max-w-4xl mx-auto">
+            
+            <div className="bg-slate-800 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+              <div className="absolute top-0 right-0 -mr-8 -mt-8 h-32 w-32 rounded-full border-4 border-slate-700 opacity-50"></div>
+              <h3 className="text-2xl font-bold mb-4 relative z-10">Annual Maintenance Contract (AMC)</h3>
+              <p className="text-slate-300 mb-6 relative z-10">Protect your investment with our comprehensive AMC plans starting at just ₹1,999/year. Includes free service visits and filter replacements.</p>
+              <button className="bg-white text-slate-900 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition relative z-10">View Plans</button>
+            </div>
+          </div>
+
+          {/* Booking Form */}
+          <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+            <h2 className="text-2xl font-bold text-slate-800 mb-6 text-center">Book a Service Request</h2>
+
+            {success ? (
+              <div className="text-center py-12 flex flex-col items-center">
+                <div className="h-20 w-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle size={40} />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 mb-2">Booking Confirmed!</h3>
+                <p className="text-slate-600 mb-8 max-w-sm mx-auto">Your service request has been successfully submitted. Our team will contact you shortly to confirm the appointment.</p>
+                <button 
+                  onClick={() => setSuccess(false)}
+                  className="bg-blue-600 text-white font-medium py-3 px-8 rounded-lg hover:bg-blue-700 transition"
+                >
+                  Book Another Service
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
+                    <input 
+                      required
+                      type="text" 
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                      value={formData.name}
+                      onChange={e => setFormData({...formData, name: e.target.value})}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number *</label>
+                    <input 
+                      required
+                      type="tel" 
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                      value={formData.phone}
+                      onChange={e => setFormData({...formData, phone: e.target.value})}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Email Address (Optional)</label>
+                  <input 
+                    type="email" 
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                    value={formData.email}
+                    onChange={e => setFormData({...formData, email: e.target.value})}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Service Type *</label>
+                    <div className="relative">
+                      <select 
+                        required
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition appearance-none"
+                        value={formData.serviceType}
+                        onChange={e => setFormData({...formData, serviceType: e.target.value})}
+                      >
+                        <option value="domestic">Domestic RO</option>
+                        <option value="commercial">Commercial RO Plant</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        ▼
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Preferred Date *</label>
+                    <input 
+                      required
+                      type="date" 
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                      value={formData.preferredDate}
+                      onChange={e => setFormData({...formData, preferredDate: e.target.value})}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Full Address *</label>
+                  <textarea 
+                    required
+                    rows="2"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                    value={formData.address}
+                    onChange={e => setFormData({...formData, address: e.target.value})}
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Brief Description of Issue</label>
+                  <textarea 
+                    rows="3"
+                    placeholder="e.g., Leaking water, strange taste, or routine checkup required..."
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                    value={formData.issueDescription}
+                    onChange={e => setFormData({...formData, issueDescription: e.target.value})}
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 transition transform hover:-translate-y-0.5 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  {loading ? 'Submitting Request...' : 'Confirm Booking'}
+                </button>
+                <p className="text-xs text-center text-slate-500 mt-4">No payment required to book. Our team will provide an estimate before service.</p>
+              </form>
+            )}
+          </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

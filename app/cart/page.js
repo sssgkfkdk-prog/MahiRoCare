@@ -6,11 +6,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Script from 'next/script';
-import { Trash2, Plus, Minus, ArrowRight } from 'lucide-react';
+import { Trash2, Plus, Minus, ArrowRight, ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import * as motion from 'framer-motion/client';
 
 export default function CartPage() {
-  const { cart, cartTotal, removeFromCart, updateQuantity, clearCart, isMounted } = useCart();
+  const { cart, cartTotal, cartCount, removeFromCart, updateQuantity, clearCart, isMounted } = useCart();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -117,9 +118,15 @@ export default function CartPage() {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Cart Items */}
-              <div className="lg:col-span-2 space-y-4">
-                {cart.map(item => (
-                  <div key={item._id} className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center gap-6 hover:shadow-md transition-shadow relative">
+                <div className="lg:col-span-2 space-y-6">
+                {cart.map((item, index) => (
+                  <motion.div 
+                    key={item._id} 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center gap-6 hover:shadow-xl hover:border-blue-200 transition-all group relative"
+                  >
                     <div className="h-28 w-28 bg-slate-50 rounded-xl overflow-hidden flex-shrink-0 border border-slate-100 p-2">
                        {item.images?.[0] ? (
                          <img src={item.images[0]} alt={item.name} className="h-full w-full object-contain mix-blend-multiply transition-transform hover:scale-105" />
@@ -143,7 +150,7 @@ export default function CartPage() {
                         <Trash2 size={20} />
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 

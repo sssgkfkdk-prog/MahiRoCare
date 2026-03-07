@@ -24,6 +24,7 @@ export default function Navbar() {
           <div className="hidden sm:flex sm:items-center space-x-8">
             <Link href="/" className="text-slate-600 hover:text-blue-600 font-medium transition">Home</Link>
             <Link href="/products" className="text-slate-600 hover:text-blue-600 font-medium transition">Products</Link>
+            <Link href="/amc" className="text-slate-600 hover:text-blue-600 font-medium transition">AMC Plans</Link>
             <Link href="/services" className="text-slate-600 hover:text-blue-600 font-medium transition">Book Service</Link>
             
             <div className="flex items-center space-x-4 border-l pl-4 border-slate-200">
@@ -72,6 +73,7 @@ export default function Navbar() {
           <div className="pt-2 pb-3 space-y-1">
             <Link href="/" onClick={() => setIsOpen(false)} className="block pl-3 pr-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 font-medium">Home</Link>
             <Link href="/products" onClick={() => setIsOpen(false)} className="block pl-3 pr-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 font-medium">Products</Link>
+            <Link href="/amc" onClick={() => setIsOpen(false)} className="block pl-3 pr-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 font-medium">AMC Plans</Link>
             <Link href="/services" onClick={() => setIsOpen(false)} className="block pl-3 pr-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-blue-600 font-medium">Book Service</Link>
             
             <div className="border-t border-slate-100 my-2"></div>

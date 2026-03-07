@@ -126,7 +126,7 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Experience the Mahi RO Care Standard</h2>
             <p className="text-blue-100 mb-8 text-lg">Whether you need a new installation, emergency repair, or an AMC plan, our professional technicians are just a call away.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="/services" className="bg-white text-blue-600 font-bold py-3 px-8 rounded-xl hover:bg-slate-50 transition shadow-lg">Book Service Now</a>
+                <Link href="/services" className="bg-white text-blue-600 font-bold py-3 px-8 rounded-xl hover:bg-slate-50 transition shadow-lg inline-block text-center">Book Service Now</Link>
                 <a href="/contact" className="bg-blue-700 border border-blue-500 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-800 transition">Contact Support</a>
             </div>
           </div>

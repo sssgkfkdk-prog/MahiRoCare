@@ -1,10 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function PremiumIndustrialRO() {
+  const [bubbles, setBubbles] = useState([]);
+
+  useEffect(() => {
+    // Generate stable random values only on the client
+    setBubbles([...Array(8)].map((_, i) => ({
+      id: i,
+      size: Math.random() * 8 + 4,
+      left: Math.random() * 80 + 10,
+      duration: Math.random() * 3 + 4,
+      delay: Math.random() * 3,
+      xMove: Math.random() * 30 - 15
+    })));
+  }, []);
+
   return (
-    <div className="relative w-full h-[500px] flex items-center justify-center overflow-visible perspective-[1200px]">
+    <div className="relative w-full h-[500px] flex items-center justify-center overflow-visible [perspective:1200px]">
       
       {/* Intense Ambient Glow for Industrial feel */}
       <motion.div 
@@ -73,25 +88,25 @@ export default function PremiumIndustrialRO() {
       </motion.div>
 
       {/* Floating Particles/Bubbles */}
-      {[...Array(8)].map((_, i) => (
+      {bubbles.map((bubble) => (
         <motion.div
-          key={`bubble-${i}`}
+          key={`bubble-${bubble.id}`}
           className="absolute rounded-full bg-cyan-200 blur-[2px] opacity-60"
           style={{
-            width: Math.random() * 8 + 4 + 'px',
-            height: Math.random() * 8 + 4 + 'px',
-            left: Math.random() * 80 + 10 + '%',
+            width: bubble.size + 'px',
+            height: bubble.size + 'px',
+            left: bubble.left + '%',
           }}
           animate={{
             y: [150, -250],
-            x: [0, Math.random() * 30 - 15],
+            x: [0, bubble.xMove],
             opacity: [0, 0.8, 0],
           }}
           transition={{
-            duration: Math.random() * 3 + 4,
+            duration: bubble.duration,
             repeat: Infinity,
             ease: "linear",
-            delay: Math.random() * 3
+            delay: bubble.delay
           }}
         />
       ))}

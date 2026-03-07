@@ -164,7 +164,7 @@ export default function ServicesPage() {
               <div className="absolute top-0 right-0 -mr-8 -mt-8 h-32 w-32 rounded-full border-4 border-slate-700 opacity-50"></div>
               <h3 className="text-2xl font-bold mb-4 relative z-10">Annual Maintenance Contract (AMC)</h3>
               <p className="text-slate-300 mb-6 relative z-10">Protect your investment with our comprehensive AMC plans starting at just ₹1,999/year. Includes free service visits and filter replacements.</p>
-              <Link href="/amc" className="inline-block bg-white text-slate-900 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition relative z-10">View Plans</Link>
+              <Link href="/products" className="inline-block bg-white text-slate-900 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition relative z-10 shadow-md hover:shadow-xl active:scale-95">View Plans</Link>
             </div>
           </div>
 

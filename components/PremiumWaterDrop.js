@@ -1,10 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function PremiumWaterDrop() {
+  const [bubbles, setBubbles] = useState([]);
+
+  useEffect(() => {
+    // Generate stable random values only on the client
+    setBubbles([...Array(5)].map((_, i) => ({
+      id: i,
+      size: Math.random() * 15 + 5,
+      left: Math.random() * 60 + 20,
+      duration: Math.random() * 2 + 2,
+      delay: Math.random() * 2,
+      xMove: Math.random() * 20 - 10
+    })));
+  }, []);
+
   return (
-    <div className="relative w-full h-[500px] flex items-center justify-center overflow-visible perspective-[1000px]">
+    <div className="relative w-full h-[500px] flex items-center justify-center overflow-visible [perspective:1000px]">
       
       {/* Intense Ambient Glow */}
       <motion.div 
@@ -50,26 +65,26 @@ export default function PremiumWaterDrop() {
         <div className="absolute top-[20%] left-[25%] w-[20px] h-[20px] rounded-full bg-white opacity-80 blur-[2px]"></div>
 
         {/* Small rising bubbles */}
-        {[...Array(5)].map((_, i) => (
+        {bubbles.map((bubble) => (
           <motion.div
-            key={i}
+            key={bubble.id}
             className="absolute rounded-full bg-white/60 blur-[1px]"
             style={{
-              width: Math.random() * 15 + 5 + 'px',
-              height: Math.random() * 15 + 5 + 'px',
-              left: Math.random() * 60 + 20 + '%',
+              width: bubble.size + 'px',
+              height: bubble.size + 'px',
+              left: bubble.left + '%',
             }}
             animate={{
               y: [100, -100],
-              x: [0, Math.random() * 20 - 10],
+              x: [0, bubble.xMove],
               opacity: [0, 0.8, 0],
               scale: [0.5, 1, 0.5]
             }}
             transition={{
-              duration: Math.random() * 2 + 2,
+              duration: bubble.duration,
               repeat: Infinity,
               ease: "linear",
-              delay: Math.random() * 2
+              delay: bubble.delay
             }}
           />
         ))}

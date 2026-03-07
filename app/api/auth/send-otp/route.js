@@ -29,14 +29,13 @@ export async function POST(req) {
     await user.save();
 
     // Send OTP via SendGrid
-    if (process.env.SENDGRID_API_KEY && process.env.SENDGRID_API_KEY !== 'your_sendgrid_api_key_here') {
-      const result = await sendOTP(email, otp);
-      if (!result.success) {
-        return NextResponse.json({ error: 'Failed to send OTP email' }, { status: 500 });
-      }
-    } else {
-      // For local development without Sendgrid Key, log the OTP
-      console.log(`[LOCAL DEV] OTP for ${email} is ${otp}`);
+    if (!process.env.SENDGRID_API_KEY || process.env.SENDGRID_API_KEY === 'your_sendgrid_api_key_here') {
+      return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
+    }
+
+    const result = await sendOTP(email, otp);
+    if (!result.success) {
+      return NextResponse.json({ error: 'Failed to send OTP email' }, { status: 500 });
     }
 
     return NextResponse.json({ message: 'OTP sent successfully' }, { status: 200 });

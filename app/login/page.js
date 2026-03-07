@@ -13,6 +13,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [otp, setOtp] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -22,18 +24,39 @@ export default function LoginPage() {
 
     try {
       if (isRegistering) {
-        // Register User first
-        const res = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password })
-        });
-        
-        if (!res.ok) {
+        if (!otpSent) {
+          // Step 1: Send OTP
+          const res = await fetch('/api/auth/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          
           const data = await res.json();
-          alert(data.error || 'Failed to register');
+          if (!res.ok) {
+            alert(data.error || 'Failed to send OTP');
+            setLoading(false);
+            return;
+          }
+          
+          setOtpSent(true);
+          alert('OTP sent to your email. Please check and enter it to verify.');
           setLoading(false);
           return;
+        } else {
+          // Step 2: Register with OTP
+          const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password, otp })
+          });
+          
+          if (!res.ok) {
+            const data = await res.json();
+            alert(data.error || 'Failed to register');
+            setLoading(false);
+            return;
+          }
         }
       }
 
@@ -133,29 +156,33 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Key size={18} className="text-slate-400" />
+            {isRegistering && otpSent && (
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Enter OTP</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Key size={18} className="text-slate-400" />
+                  </div>
+                  <input 
+                    type="text" 
+                    required
+                    maxLength={6}
+                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 text-slate-900"
+                    placeholder="123456"
+                    value={otp}
+                    onChange={e => setOtp(e.target.value)}
+                  />
                 </div>
-                <input 
-                  type="password" 
-                  required
-                  className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 text-slate-900"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
+                <p className="text-xs text-slate-500 mt-1">OTP sent to {email}</p>
               </div>
-            </div>
+            )}
 
             <button 
               type="submit" 
               disabled={loading}
               className="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition shadow-md disabled:opacity-70"
             >
-              {loading ? 'Processing...' : (isRegistering ? 'Sign Up' : 'Sign In')}
+              {loading ? 'Processing...' : (isRegistering ? (otpSent ? 'Verify & Register' : 'Send Verification Code') : 'Sign In')}
             </button>
             <div className="text-center mt-4">
               <button 

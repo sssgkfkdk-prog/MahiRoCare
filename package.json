@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "git commit --allow-empty -m 'Manual redeploy trigger' && git push origin main"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",

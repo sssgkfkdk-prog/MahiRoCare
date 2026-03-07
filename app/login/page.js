@@ -218,16 +218,18 @@ function LoginContent() {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">
+                {authStep === 'login' ? 'Email/Username' : 'Email'}
+              </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail size={18} className="text-slate-400" />
                 </div>
                 <input 
-                  type="email" 
+                  type="text" 
                   required
                   className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 text-slate-900"
-                  placeholder="you@example.com"
+                  placeholder={authStep === 'login' ? "Email or Username" : "you@example.com"}
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                 />

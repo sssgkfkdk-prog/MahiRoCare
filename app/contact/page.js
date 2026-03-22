@@ -23,8 +23,11 @@ export default function ContactPage() {
                  </div>
                  
                  <div>
-                   <h4 className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Call Us</h4>
-                   <p className="text-sm font-medium">+91 90767 23600</p>
+                   <h4 className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Call or WhatsApp</h4>
+                   <a href="https://wa.me/919076723600" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-blue-400 transition flex items-center gap-2">
+                     +91 90767 23600
+                     <span className="text-[10px] bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter">Chat Now</span>
+                   </a>
                  </div>
                  
                  <div>

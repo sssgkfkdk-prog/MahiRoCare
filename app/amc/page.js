@@ -257,9 +257,14 @@ export default function AMCPage() {
           <Info className="text-blue-600 mx-auto mb-6" size={48} />
           <h3 className="text-2xl font-black text-slate-900 mb-4">Have questions about AMC?</h3>
           <p className="text-slate-600 mb-8">Not sure which plan is right for you? Our experts can help you choose the best protection based on your water quality and usage.</p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold border border-blue-200 hover:bg-blue-600 hover:text-white transition-all">
+          <a 
+            href="https://wa.me/919076723600" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block bg-white text-blue-600 px-8 py-3 rounded-xl font-bold border border-blue-200 hover:bg-blue-600 hover:text-white transition-all shadow-sm hover:shadow-md active:scale-95"
+          >
             Chat with Expert
-          </button>
+          </a>
         </div>
       </section>
 

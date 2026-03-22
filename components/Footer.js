@@ -43,7 +43,10 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <span className="mr-2">📞</span>
-                <span>+91 90767 23600</span>
+                <a href="https://wa.me/919076723600" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition flex items-center gap-2">
+                  +91 90767 23600
+                  <span className="text-[10px] bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter">WhatsApp</span>
+                </a>
               </li>
               <li className="flex items-center">
                 <span className="mr-2">✉️</span>

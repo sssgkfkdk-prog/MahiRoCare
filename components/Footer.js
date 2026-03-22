@@ -58,9 +58,10 @@ export default function Footer() {
         
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
           <p>© {new Date().getFullYear()} Mahi RO Care. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="#" className="hover:text-white transition">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition">Terms of Service</Link>
+          <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
+            <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition">Terms of Service</Link>
+            <Link href="/refund" className="hover:text-white transition">Refund Policy</Link>
           </div>
         </div>
       </div>

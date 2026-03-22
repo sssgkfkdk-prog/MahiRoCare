@@ -4,52 +4,14 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ShoppingCart, Shield, CheckCircle } from 'lucide-react';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/components/CartProvider';
+import { amcPlans } from '@/lib/amcPlans';
 
 export default function ProductsPage() {
-  const plans = [
-    {
-      name: 'Basic Care',
-      price: 1999,
-      duration: 'per year',
-      description: 'Essential maintenance for domestic RO purifiers.',
-      features: [
-        '3 Free Service Visits',
-        '1 Free Pre-filter change',
-        'Basic cleaning of machine',
-        'TDS level check & adjustment',
-        '10% off on spare parts'
-      ]
-    },
-    {
-      name: 'Premium Shield',
-      price: 3499,
-      duration: 'per year',
-      popular: true,
-      description: 'Complete peace of mind with replacement coverage.',
-      features: [
-        'Unlimited Service Visits',
-        'All Filters changing covered (Sediment, Carbon)',
-        'RO Membrane replacement covered',
-        'Pump & Adapter warranty',
-        'Free emergency leak repairs'
-      ]
-    },
-    {
-      name: 'Commercial Care',
-      price: 'Custom',
-      duration: 'quoted via inspection',
-      description: 'Heavy duty maintenance for industrial scale plants.',
-      features: [
-        'Monthly comprehensive checkups',
-        'Industrial membrane flushing',
-        'High-pressure pump servicing',
-        'Vessel cleaning & media replacement',
-        'Dedicated 24/7 priority support'
-      ]
-    }
-  ];
+  const [amcCategory, setAmcCategory] = useState('domestic');
+  const activeAmcPlans = amcPlans[amcCategory];
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -99,7 +61,7 @@ export default function ProductsPage() {
                             </span>
                           )}
                           {product.images?.[0] ? (
-                            <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain mix-blend-multiply transition-transform hover:scale-105" />
+                            <Image src={product.images[0]} alt={product.name} fill className="object-contain mix-blend-multiply transition-transform hover:scale-105" unoptimized />
                           ) : (
                             <span className="text-slate-400 font-medium text-sm">No Image</span>
                           )}
@@ -158,7 +120,7 @@ export default function ProductsPage() {
                             </span>
                           )}
                           {product.images?.[0] ? (
-                            <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain mix-blend-multiply transition-transform hover:scale-105" />
+                            <Image src={product.images[0]} alt={product.name} fill className="object-contain mix-blend-multiply transition-transform hover:scale-105" unoptimized />
                           ) : (
                             <span className="text-slate-400 font-medium text-sm">No Image</span>
                           )}
@@ -210,8 +172,24 @@ export default function ProductsPage() {
                   <div className="absolute bottom-0 left-0 w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl -ml-10 -mb-10"></div>
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 border border-cyan-400/30 rounded-full bg-cyan-400/10 text-cyan-300 font-semibold text-xs tracking-wider uppercase self-start">
-                      <Shield size={14} className="text-cyan-400" /> AMC Protection
+                    <div className="flex justify-between items-center mb-8">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 border border-cyan-400/30 rounded-full bg-cyan-400/10 text-cyan-300 font-semibold text-xs tracking-wider uppercase">
+                        <Shield size={14} className="text-cyan-400" /> AMC Protection
+                      </div>
+                      <div className="flex bg-slate-800 p-1 rounded-lg gap-1 border border-slate-700">
+                        <button 
+                          onClick={() => setAmcCategory('domestic')}
+                          className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-tighter transition-all ${amcCategory === 'domestic' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                        >
+                          Dom
+                        </button>
+                        <button 
+                          onClick={() => setAmcCategory('commercial')}
+                          className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-tighter transition-all ${amcCategory === 'commercial' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                        >
+                          Com
+                        </button>
+                      </div>
                     </div>
                     
                     <h2 className="text-2xl md:text-3xl font-extrabold mb-3 leading-tight text-white">
@@ -222,7 +200,7 @@ export default function ProductsPage() {
                     </p>
 
                     <div className="space-y-6 flex-grow">
-                      {plans.map((plan, index) => (
+                      {activeAmcPlans.map((plan, index) => (
                         <div 
                           key={index} 
                           className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl flex flex-col border transition-all duration-300 hover:bg-slate-800 ${

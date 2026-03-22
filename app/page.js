@@ -8,23 +8,23 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50" suppressHydrationWarning>
       <Navbar />
-      
+
       <main className="flex-1 overflow-hidden">
         {/* Her Section - Upgraded with High-End 3D */}
         <section className="relative bg-slate-900 overflow-hidden h-[90vh] min-h-[600px] flex items-center">
           {/* Subtle dark gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 z-0"></div>
-          
+
           {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
 
           {/* Abstract Custom 3D Component */}
           <div className="absolute inset-y-0 right-0 w-full lg:w-1/2 flex items-center justify-center lg:justify-end pr-0 lg:pr-10 z-0 opacity-80 mt-20 lg:mt-0">
-             <PremiumWaterDrop />
+            <PremiumWaterDrop />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center w-full">
-            <motion.div 
+            <motion.div
               className="lg:w-1/2 mb-12 lg:mb-0 backdrop-blur-sm bg-slate-900/30 p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -34,7 +34,7 @@ export default function Home() {
                 NEXT-GENERATION PURIFICATION
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight">
-                Pure Water. <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Perfect Clarity.</span>
+                Pure Water. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Perfect Clarity.</span>
               </h1>
               <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-lg leading-relaxed font-light">
                 Experience the pinnacle of water purification. Our premium domestic and commercial RO systems deliver 100% safe, mineral-balanced water to your home and office.
@@ -54,7 +54,7 @@ export default function Home() {
         {/* Features Section */}
         <section className="py-24 bg-slate-50 relative border-t border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
+            <motion.div
               className="text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -64,9 +64,9 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold text-slate-800">Why Choose Mahi RO Care?</h2>
               <p className="mt-4 text-slate-500 max-w-2xl mx-auto text-lg">We provide comprehensive water purification solutions with unmatched quality and support.</p>
             </motion.div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <motion.div 
+              <motion.div
                 className="bg-slate-50 p-8 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition-shadow bg-gradient-to-b from-white to-slate-50"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export default function Home() {
                 <p className="text-slate-500 leading-relaxed">Industry-leading RO systems equipped with advanced filtration technology for 100% safe water.</p>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="bg-slate-50 p-8 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition-shadow bg-gradient-to-b from-white to-slate-50"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function Home() {
                 <p className="text-slate-500 leading-relaxed">Fast and reliable installation, repair, and AMC services by certified technicians.</p>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="bg-slate-50 p-8 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition-shadow bg-gradient-to-b from-white to-slate-50"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -112,7 +112,7 @@ export default function Home() {
         <section className="bg-blue-50 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-slate-800 mb-6">Need Immediate RO Service?</h2>
-            <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">Our expert technicians are just a click away. Book a service online and we'll be at your doorstep within 24 hours.</p>
+            <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">Our expert technicians are just a click away. Book a service online and we&apos;ll be at your doorstep within 24 hours.</p>
             <Link href="/services" className="bg-blue-600 text-white font-bold py-4 px-10 rounded-lg text-lg hover:bg-blue-700 transition shadow-lg inline-block">
               Schedule a Visit
             </Link>

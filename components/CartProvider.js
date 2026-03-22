@@ -9,15 +9,17 @@ export function CartProvider({ children }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
-    const savedCart = localStorage.getItem('ro-cart');
-    if (savedCart) {
-      try {
-        setCart(JSON.parse(savedCart));
-      } catch (e) {
-        console.error('Failed to parse cart');
+    Promise.resolve().then(() => {
+      setIsMounted(true);
+      const savedCart = localStorage.getItem('ro-cart');
+      if (savedCart) {
+        try {
+          setCart(JSON.parse(savedCart));
+        } catch (e) {
+          console.error('Failed to parse cart');
+        }
       }
-    }
+    });
   }, []);
 
   useEffect(() => {

@@ -45,7 +45,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <motion.div 
+    <motion.div
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -54,25 +54,25 @@ export default function AdminDashboard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-3xl font-black text-slate-900 tracking-tight">System Overview</h2>
-          <p className="text-slate-500 font-medium">Welcome back, Admin. Here's what's happening today.</p>
+          <p className="text-slate-500 font-medium">Welcome back, Admin. Here&apos;s what&apos;s happening today.</p>
         </div>
         <div className="flex gap-3">
-           <button className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-50 transition shadow-sm">
-              Export PDF
-           </button>
-           <button className="px-5 py-2 bg-blue-600 text-white rounded-xl text-sm font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/20">
-              New Report
-           </button>
+          <button className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-50 transition shadow-sm">
+            Export PDF
+          </button>
+          <button className="px-5 py-2 bg-blue-600 text-white rounded-xl text-sm font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/20">
+            New Report
+          </button>
         </div>
       </div>
-      
+
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
-            <motion.div 
-              key={stat.label} 
+            <motion.div
+              key={stat.label}
               variants={itemVariants}
               whileHover={{ y: -5 }}
               className="premium-card p-6 flex flex-col justify-between group cursor-default"
@@ -98,7 +98,7 @@ export default function AdminDashboard() {
       {/* Main Analysis Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Mock Chart Area */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="lg:col-span-2 premium-card p-8 min-h-[400px] flex flex-col"
         >
@@ -112,11 +112,11 @@ export default function AdminDashboard() {
               <option>Last Quarter</option>
             </select>
           </div>
-          
+
           <div className="flex-1 relative flex items-end gap-1 sm:gap-4 px-2">
             {[40, 70, 45, 90, 65, 80, 55].map((height, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-3 group">
-                <motion.div 
+                <motion.div
                   initial={{ height: 0 }}
                   animate={{ height: `${height}%` }}
                   transition={{ delay: 0.5 + (i * 0.1), duration: 1, ease: "easeOut" }}
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
         {/* Top Notifications/Activity */}
         <motion.div variants={itemVariants} className="premium-card p-8 flex flex-col">
           <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-             <TrendingUp className="text-indigo-600" size={20} /> Recent Activity
+            <TrendingUp className="text-indigo-600" size={20} /> Recent Activity
           </h3>
           <div className="space-y-6 flex-1">
             {[

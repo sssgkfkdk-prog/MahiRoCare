@@ -8,14 +8,16 @@ export default function PremiumIndustrialRO() {
 
   useEffect(() => {
     // Generate stable random values only on the client
-    setBubbles([...Array(8)].map((_, i) => ({
-      id: i,
-      size: Math.random() * 8 + 4,
-      left: Math.random() * 80 + 10,
-      duration: Math.random() * 3 + 4,
-      delay: Math.random() * 3,
-      xMove: Math.random() * 30 - 15
-    })));
+    Promise.resolve().then(() => {
+      setBubbles([...Array(8)].map((_, i) => ({
+        id: i,
+        size: Math.random() * 8 + 4,
+        left: Math.random() * 80 + 10,
+        duration: Math.random() * 3 + 4,
+        delay: Math.random() * 3,
+        xMove: Math.random() * 30 - 15
+      })));
+    });
   }, []);
 
   return (

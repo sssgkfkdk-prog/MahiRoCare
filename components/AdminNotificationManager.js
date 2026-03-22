@@ -14,8 +14,7 @@ export default function AdminNotificationManager() {
     // Hidden audio element for the bell sound
     audioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
     audioRef.current.volume = 0.5;
-
-    setLastChecked(new Date().toISOString());
+    Promise.resolve().then(() => setLastChecked(new Date().toISOString()));
 
     const checkInterval = setInterval(async () => {
       if (!lastChecked) return;

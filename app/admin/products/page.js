@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Plus, Edit, Trash2, Search, Filter, Loader2, Package, MoreVertical, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
@@ -123,9 +124,9 @@ export default function AdminProductsPage() {
                 >
                   <td className="px-8 py-5">
                     <div className="flex items-center gap-4">
-                      <div className="h-14 w-14 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0">
+                      <div className="h-14 w-14 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 relative">
                         {product.images?.[0] ? (
-                          <img className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" src={product.images[0]} alt="" />
+                          <Image className="object-cover group-hover:scale-110 transition-transform duration-500" src={product.images[0]} alt="" fill unoptimized />
                         ) : (
                           <div className="h-full w-full flex items-center justify-center text-slate-300">
                             <Package size={24} />

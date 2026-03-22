@@ -5,79 +5,27 @@ import { Shield, CheckCircle, ShoppingCart, Info, ArrowRight, Zap, Gem, Crown, X
 import { useCart } from '@/components/CartProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 
-const plans = [
-  {
-    name: 'Basic Care',
-    price: 1999,
-    originalPrice: 2499,
-    duration: '1 Year',
-    icon: <Zap className="text-blue-500" size={24} />,
-    description: 'Essential maintenance for residential RO purifiers to ensure clean drinking water.',
-    features: [
-      '3 Compulsory Service Visits',
-      '1 Free Pre-filter replacement',
-      'Basic cleaning of machine',
-      'Free breakdown calls',
-      '10% discount on additional spare parts'
-    ],
-    color: 'from-blue-500/20 to-blue-600/5',
-    borderColor: 'border-blue-100',
-    popular: false
-  },
-  {
-    name: 'Premium Shield',
-    price: 3499,
-    originalPrice: 4499,
-    duration: '1 Year',
-    icon: <Gem className="text-cyan-500" size={24} />,
-    description: 'Complete peace of mind with replacement coverage and priority support.',
-    features: [
-      'Unlimited Breakdown Calls',
-      'Complete Filter Set Change (once)',
-      'Free Membrane replacement (if needed)',
-      'Electronic parts coverage',
-      'Priority 4-hour service response',
-      'Free water quality test'
-    ],
-    color: 'from-cyan-500/20 to-blue-600/10',
-    borderColor: 'border-cyan-200',
-    popular: true
-  },
-  {
-    name: 'Commercial Pro',
-    price: 8999,
-    originalPrice: 10999,
-    duration: '1 Year',
-    icon: <Crown className="text-amber-500" size={24} />,
-    description: 'Heavy utility protection for high-capacity industrial and commercial RO plants.',
-    features: [
-      'Monthly preventive maintenance',
-      'Dual filter set replacement',
-      'High-pressure pump servicing',
-      'TDS & pH balance monitoring',
-      'Dedicated relationship manager',
-      'Industrial-grade cleaning'
-    ],
-    color: 'from-amber-500/20 to-orange-600/5',
-    borderColor: 'border-amber-100',
-    popular: false
-  }
-];
+import { amcPlans } from '@/lib/amcPlans';
+import { useState } from 'react';
+
 
 export default function AMCPage() {
+  const [category, setCategory] = useState('domestic');
   const { addToCart } = useCart();
+  const currentPlans = amcPlans[category];
 
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 overflow-hidden bg-white">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-50/50 skew-x-[-20deg] translate-x-1/2 -z-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <motion.div 
+            <motion.div
               className="lg:w-1/2"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -90,7 +38,7 @@ export default function AMCPage() {
                 Annual <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Maintenance</span> Made Simple
               </h1>
               <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
-                Protect your family's health and extend the life of your RO system with our premium care plans. No hidden costs, just pure water.
+                Protect your family&apos;s health and extend the life of your RO system with our premium care plans. No hidden costs, just pure water.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="#plans" className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/25 flex items-center gap-2">
@@ -98,16 +46,16 @@ export default function AMCPage() {
                 </a>
                 <div className="flex -space-x-3 items-center ml-4">
                   {[1, 2, 3, 4].map(i => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 overflow-hidden">
-                      <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" className="w-full h-full object-cover" />
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 overflow-hidden relative">
+                      <Image src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="user" fill className="object-cover" unoptimized />
                     </div>
                   ))}
                   <p className="ml-6 text-sm font-semibold text-slate-500 italic">+ 500+ happy customers</p>
                 </div>
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               className="lg:w-1/2 relative"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -133,7 +81,7 @@ export default function AMCPage() {
                 </div>
               </div>
               {/* Floating element */}
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-10 -left-10 bg-white p-6 rounded-2xl shadow-2xl hidden lg:block border border-blue-50"
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -157,27 +105,44 @@ export default function AMCPage() {
       <section id="plans" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-black text-slate-900 mb-4">Choose Your Protection</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">Affordable annual contracts tailored to your usage. Select a plan to get started immediately.</p>
+          <p className="text-slate-600 max-w-2xl mx-auto mb-10">Affordable annual contracts tailored to your usage. Select a plan to get started immediately.</p>
+          
+          {/* Category Toggle */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-slate-200/50 p-1.5 rounded-2xl flex gap-1">
+              <button 
+                onClick={() => setCategory('domestic')}
+                className={`px-8 py-3 rounded-xl font-bold text-sm transition-all ${category === 'domestic' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                Domestic Plans
+              </button>
+              <button 
+                onClick={() => setCategory('commercial')}
+                className={`px-8 py-3 rounded-xl font-bold text-sm transition-all ${category === 'commercial' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                Commercial Plans
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan, idx) => (
+          {currentPlans.map((plan, idx) => (
             <motion.div
               key={plan.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className={`relative bg-white rounded-[2rem] border-2 transition-all duration-500 hover:shadow-3xl group overflow-hidden ${
-                plan.popular ? 'border-blue-500 scale-105 z-10' : plan.borderColor
-              }`}
+              className={`relative bg-white rounded-[2rem] border-2 transition-all duration-500 hover:shadow-3xl group overflow-hidden ${plan.popular ? 'border-blue-500 scale-105 z-10' : plan.borderColor
+                }`}
             >
               {plan.popular && (
                 <div className="bg-blue-500 text-white text-center py-2 text-xs font-black uppercase tracking-widest">
                   Most Recommended
                 </div>
               )}
-              
+
               <div className={`p-8 bg-gradient-to-br ${plan.color}`}>
                 <div className="flex justify-between items-start mb-6">
                   <div className="p-3 bg-white rounded-2xl shadow-sm">
@@ -191,7 +156,7 @@ export default function AMCPage() {
                     </div>
                   </div>
                 </div>
-                
+
                 <h3 className="text-2xl font-black text-slate-900 mb-3">{plan.name}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed mb-8">
                   {plan.description}
@@ -207,24 +172,30 @@ export default function AMCPage() {
                 </div>
 
                 <button
-                  onClick={() => addToCart({
-                    _id: `amc_${plan.name.toLowerCase().replace(' ', '_')}`,
-                    name: plan.name + ' AMC Plan',
-                    price: plan.price,
-                    category: 'AMC',
-                    images: [],
-                    description: plan.description
-                  })}
-                  className={`w-full py-4 rounded-xl font-black text-sm transition-all flex items-center justify-center gap-2 ${
-                    plan.popular 
-                      ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-500/30' 
-                      : 'bg-slate-900 text-white hover:bg-slate-800'
-                  } active:scale-95`}
+                  onClick={() => {
+                    if (plan.price === 'Custom') {
+                      window.location.href = '/contact';
+                      return;
+                    }
+                    addToCart({
+                      _id: `amc_${plan.name.toLowerCase().replace(/ /g, '_')}`,
+                      name: plan.name + ' AMC Plan',
+                      price: plan.price,
+                      category: 'AMC',
+                      images: [],
+                      description: plan.description
+                    })
+                  }}
+                  className={`w-full py-4 rounded-xl font-black text-sm transition-all flex items-center justify-center gap-2 ${plan.popular
+                      ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-500/30'
+                      : plan.price === 'Custom' ? 'bg-white text-slate-900 border-2 border-slate-200 hover:bg-slate-50' : 'bg-slate-900 text-white hover:bg-slate-800'
+                    } active:scale-95`}
                 >
-                  <ShoppingCart size={18} /> Buy Plan Now
+                  {plan.price === 'Custom' ? <ArrowRight size={18} /> : <ShoppingCart size={18} />} 
+                  {plan.price === 'Custom' ? 'Get Custom Quote' : 'Buy Plan Now'}
                 </button>
               </div>
-              
+
               <div className="p-4 bg-slate-50 text-center text-xs font-bold text-slate-400 border-t border-slate-100 tracking-wide uppercase">
                 Secure SSL Checkout
               </div>
@@ -257,24 +228,24 @@ export default function AMCPage() {
               </div>
             </div>
             <div className="md:w-1/2 relative">
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-4 pt-12">
-                     <div className="bg-blue-600/20 aspect-square rounded-3xl border border-blue-500/30 flex items-center justify-center">
-                        <Shield className="text-blue-400" size={48} />
-                     </div>
-                     <div className="bg-cyan-600/20 aspect-square rounded-3xl border border-cyan-500/30 flex items-center justify-center">
-                        <CheckCircle className="text-cyan-400" size={48} />
-                     </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4 pt-12">
+                  <div className="bg-blue-600/20 aspect-square rounded-3xl border border-blue-500/30 flex items-center justify-center">
+                    <Shield className="text-blue-400" size={48} />
                   </div>
-                  <div className="space-y-4">
-                     <div className="bg-slate-800 aspect-square rounded-3xl flex items-center justify-center">
-                        <p className="text-6xl font-black">2k+</p>
-                     </div>
-                     <div className="bg-amber-600/20 aspect-square rounded-3xl border border-amber-500/30 flex items-center justify-center">
-                        <Crown className="text-amber-400" size={48} />
-                     </div>
+                  <div className="bg-cyan-600/20 aspect-square rounded-3xl border border-cyan-500/30 flex items-center justify-center">
+                    <CheckCircle className="text-cyan-400" size={48} />
                   </div>
-               </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="bg-slate-800 aspect-square rounded-3xl flex items-center justify-center">
+                    <p className="text-6xl font-black">2k+</p>
+                  </div>
+                  <div className="bg-amber-600/20 aspect-square rounded-3xl border border-amber-500/30 flex items-center justify-center">
+                    <Crown className="text-amber-400" size={48} />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -283,12 +254,12 @@ export default function AMCPage() {
       {/* FAQ Snippet */}
       <section className="py-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="bg-blue-50 rounded-[3rem] p-12 border border-blue-100">
-           <Info className="text-blue-600 mx-auto mb-6" size={48} />
-           <h3 className="text-2xl font-black text-slate-900 mb-4">Have questions about AMC?</h3>
-           <p className="text-slate-600 mb-8">Not sure which plan is right for you? Our experts can help you choose the best protection based on your water quality and usage.</p>
-           <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold border border-blue-200 hover:bg-blue-600 hover:text-white transition-all">
-              Chat with Expert
-           </button>
+          <Info className="text-blue-600 mx-auto mb-6" size={48} />
+          <h3 className="text-2xl font-black text-slate-900 mb-4">Have questions about AMC?</h3>
+          <p className="text-slate-600 mb-8">Not sure which plan is right for you? Our experts can help you choose the best protection based on your water quality and usage.</p>
+          <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold border border-blue-200 hover:bg-blue-600 hover:text-white transition-all">
+            Chat with Expert
+          </button>
         </div>
       </section>
 

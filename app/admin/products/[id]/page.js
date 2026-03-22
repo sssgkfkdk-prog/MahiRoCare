@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { UploadCloud, X, ArrowLeft, Loader2, Save, Trash2 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function EditProductPage({ params }) {
   const router = useRouter();
@@ -236,7 +237,7 @@ export default function EditProductPage({ params }) {
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {images.map((img, i) => (
                   <div key={i} className="relative aspect-square rounded-2xl overflow-hidden border border-slate-100 shadow-sm group">
-                    <img src={img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <Image src={img} alt="" fill className="object-cover group-hover:scale-105 transition-transform duration-500" unoptimized />
                     <button 
                       type="button"
                       onClick={() => setImages(prev => prev.filter((_, idx) => idx !== i))}

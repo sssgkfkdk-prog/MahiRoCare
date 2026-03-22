@@ -9,6 +9,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { Package, Wrench, Calendar, Watch, CheckCircle, Clock } from 'lucide-react';
+import Image from 'next/image';
 
 // Helper component for status badges
 const StatusBadge = ({ status }) => {
@@ -71,7 +72,7 @@ export default async function DashboardPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          
+
           {/* Recent Product Orders */}
           <section className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="p-6 border-b border-slate-100 flex items-center justify-between">
@@ -91,7 +92,7 @@ export default async function DashboardPage() {
                 <div className="text-center py-10">
                   <Package className="mx-auto h-12 w-12 text-slate-300 mb-3" />
                   <h3 className="text-lg font-medium text-slate-900 mb-1">No orders yet</h3>
-                  <p className="text-slate-500 mb-4 text-sm">When you buy RO machines or filters, they'll show up here.</p>
+                  <p className="text-slate-500 mb-4 text-sm">When you buy RO machines or filters, they&apos;ll show up here.</p>
                   <Link href="/products" className="text-blue-600 font-medium hover:underline text-sm">Browse Products</Link>
                 </div>
               ) : (
@@ -107,13 +108,13 @@ export default async function DashboardPage() {
                         </div>
                         <StatusBadge status={order.status} />
                       </div>
-                      
+
                       <div className="space-y-3 mb-4">
                         {order.items.map((item, idx) => (
                           <div key={idx} className="flex items-center gap-3">
                             <div className="h-12 w-12 bg-white rounded border border-slate-200 flex-shrink-0 relative overflow-hidden flex items-center justify-center">
                               {item.product?.image ? (
-                                <img src={item.product.image} alt={item.product.name} className="object-cover w-full h-full" />
+                                <Image src={item.product.image} alt={item.product.name} fill className="object-cover" unoptimized />
                               ) : (
                                 <Package className="h-6 w-6 text-slate-300" />
                               )}
@@ -166,11 +167,11 @@ export default async function DashboardPage() {
                     <div key={svc._id.toString()} className="border border-slate-100 rounded-xl p-5 hover:border-cyan-200 transition bg-slate-50/50">
                       <div className="flex justify-between items-start mb-3">
                         <div className="inline-flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                           <Watch size={12} /> {svc.serviceType} RO
+                          <Watch size={12} /> {svc.serviceType} RO
                         </div>
                         <StatusBadge status={svc.status} />
                       </div>
-                      
+
                       <div className="mb-4">
                         <h4 className="text-base font-bold text-slate-800 mb-1">Service Request</h4>
                         <p className="text-sm text-slate-600">{svc.issueDescription || 'Routine checkup / installation'}</p>

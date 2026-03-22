@@ -14,7 +14,7 @@ export default function ProfileDropdown() {
 
   useEffect(() => {
     if (session && isOpen && !profileData) {
-      setLoading(true);
+      Promise.resolve().then(() => setLoading(true));
       fetch('/api/user/profile')
         .then(res => res.json())
         .then(data => {

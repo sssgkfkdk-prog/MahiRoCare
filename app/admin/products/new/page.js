@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { UploadCloud, X } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AddProductPage() {
   const router = useRouter();
@@ -196,7 +197,7 @@ export default function AddProductPage() {
             <div className="flex flex-wrap gap-4 mt-4">
               {images.map((img, i) => (
                 <div key={i} className="relative w-24 h-24 rounded-lg overflow-hidden border shadow-sm group">
-                  <img src={img} alt={`Preview ${i}`} className="w-full h-full object-cover" />
+                  <Image src={img} alt={`Preview ${i}`} fill className="object-cover" unoptimized />
                   <button 
                     type="button"
                     onClick={(e) => { e.stopPropagation(); removeImage(i); }}

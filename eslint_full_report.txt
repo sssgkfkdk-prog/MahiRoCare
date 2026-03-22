@@ -1,0 +1,123 @@
+﻿
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\about\page.js
+  52:245  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\admin\page.js
+  57:78  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  57:85  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\admin\products\[id]\page.js
+  239:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\admin\products\new\page.js
+  199:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\admin\products\page.js
+  128:27  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\amc\page.js
+   93:36  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  102:23  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\cart\page.js
+  113:70  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  132:26  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\dashboard\page.js
+   94:103  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  116:33   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\page.js
+  115:149  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\app\products\page.js
+  102:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  161:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\components\AdminNotificationManager.js
+  18:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  16 |     audioRef.current.volume = 0.5;
+  17 |
+> 18 |     setLastChecked(new Date().toISOString());
+     |     ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  19 |
+  20 |     const checkInterval = setInterval(async () => {
+  21 |       if (!lastChecked) return;  react-hooks/set-state-in-effect
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\components\CartProvider.js
+  12:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  10 |
+  11 |   useEffect(() => {
+> 12 |     setIsMounted(true);
+     |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |     const savedCart = localStorage.getItem('ro-cart');
+  14 |     if (savedCart) {
+  15 |       try {  react-hooks/set-state-in-effect
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\components\PremiumIndustrialRO.js
+  11:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   9 |   useEffect(() => {
+  10 |     // Generate stable random values only on the client
+> 11 |     setBubbles([...Array(8)].map((_, i) => ({
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  12 |       id: i,
+  13 |       size: Math.random() * 8 + 4,
+  14 |       left: Math.random() * 80 + 10,  react-hooks/set-state-in-effect
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\components\PremiumWaterDrop.js
+  11:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   9 |   useEffect(() => {
+  10 |     // Generate stable random values only on the client
+> 11 |     setBubbles([...Array(5)].map((_, i) => ({
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  12 |       id: i,
+  13 |       size: Math.random() * 15 + 5,
+  14 |       left: Math.random() * 60 + 20,  react-hooks/set-state-in-effect
+
+C:\Users\ASUS\.gemini\antigravity\playground\metallic-planck\components\ProfileDropdown.js
+  17:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  15 |   useEffect(() => {
+  16 |     if (session && isOpen && !profileData) {
+> 17 |       setLoading(true);
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  18 |       fetch('/api/user/profile')
+  19 |         .then(res => res.json())
+  20 |         .then(data => {  react-hooks/set-state-in-effect
+
+Γ£û 20 problems (12 errors, 8 warnings)
+

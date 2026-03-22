@@ -163,7 +163,7 @@ export default function ServicesPage() {
             <div className="bg-slate-800 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
               <div className="absolute top-0 right-0 -mr-8 -mt-8 h-32 w-32 rounded-full border-4 border-slate-700 opacity-50"></div>
               <h3 className="text-2xl font-bold mb-4 relative z-10">Annual Maintenance Contract (AMC)</h3>
-              <p className="text-slate-300 mb-6 relative z-10">Protect your investment with our comprehensive AMC plans starting at just ₹1,999/year. Includes free service visits and filter replacements.</p>
+              <p className="text-slate-300 mb-6 relative z-10">Protect your investment with our comprehensive AMC plans starting at just ₹2,499/year. Includes free service visits and filter replacements.</p>
               <Link href="/products" className="inline-block bg-white text-slate-900 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition relative z-10 shadow-md hover:shadow-xl active:scale-95">View Plans</Link>
             </div>
           </div>
@@ -231,13 +231,15 @@ export default function ServicesPage() {
                         value={formData.serviceType}
                         onChange={e => setFormData({...formData, serviceType: e.target.value})}
                       >
-                        <option value="" disabled>Select a service</option>
+                        <option value="Select Plan" disabled>Select a service</option>
                         <option value="Domestic RO Installation">Domestic RO Installation</option>
                         <option value="Commercial RO Installation">Commercial RO Installation</option>
                         <option value="Domestic RO Repair">Domestic RO Repair</option>
                         <option value="Commercial RO Repair">Commercial RO Repair</option>
                         <option value="Filter Replacement">Filter Replacement</option>
-                        <option value="AMC Plan">AMC (Annual Maintenance)</option>
+                        <option value="Domestic AMC (Urban Native)">Domestic AMC (Urban Native)</option>
+                        <option value="Domestic AMC (Multi-Brand)">Domestic AMC (Multi-Brand)</option>
+                        <option value="Commercial AMC Plan">Commercial AMC Plan</option>
                       </select>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                         ▼

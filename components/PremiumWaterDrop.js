@@ -8,14 +8,16 @@ export default function PremiumWaterDrop() {
 
   useEffect(() => {
     // Generate stable random values only on the client
-    setBubbles([...Array(5)].map((_, i) => ({
-      id: i,
-      size: Math.random() * 15 + 5,
-      left: Math.random() * 60 + 20,
-      duration: Math.random() * 2 + 2,
-      delay: Math.random() * 2,
-      xMove: Math.random() * 20 - 10
-    })));
+    Promise.resolve().then(() => {
+      setBubbles([...Array(5)].map((_, i) => ({
+        id: i,
+        size: Math.random() * 15 + 5,
+        left: Math.random() * 60 + 20,
+        duration: Math.random() * 2 + 2,
+        delay: Math.random() * 2,
+        xMove: Math.random() * 20 - 10
+      })));
+    });
   }, []);
 
   return (

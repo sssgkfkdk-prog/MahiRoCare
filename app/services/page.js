@@ -237,7 +237,7 @@ export default function ServicesPage() {
                         <option value="Domestic RO Repair">Domestic RO Repair</option>
                         <option value="Commercial RO Repair">Commercial RO Repair</option>
                         <option value="Filter Replacement">Filter Replacement</option>
-                        <option value="Domestic AMC (Urban Native)">Domestic AMC (Urban Native)</option>
+                        <option value="Domestic AMC (Urban Company Native)">Domestic AMC (Urban Company Native)</option>
                         <option value="Domestic AMC (Multi-Brand)">Domestic AMC (Multi-Brand)</option>
                         <option value="Commercial AMC Plan">Commercial AMC Plan</option>
                       </select>

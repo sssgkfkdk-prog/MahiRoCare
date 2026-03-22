@@ -52,7 +52,7 @@ export default function AboutPage() {
                   Founded in Prayagraj, Mahi RO Care has been at the forefront of the water purification industry for the last 5-6 years. We understand that water quality is directly tied to family health and industrial success, which is why we&apos;ve dedicated ourselves to providing uncompromising service.
                 </p>
                 <p className="text-slate-600 text-lg leading-relaxed mb-6">
-                  We are extremely proud to be official service partners with <strong className="text-blue-700">Urban Natives</strong>, along with several other prominent local scale companies. This network of trust reflects our commitment to professionalism and technical mastery.
+                  We are extremely proud to be official service partners with <strong className="text-blue-700">Urban Company Native</strong>, along with several other prominent local scale companies. This network of trust reflects our commitment to professionalism and technical mastery.
                 </p>
                 <ul className="space-y-3 pt-4 border-t border-slate-100">
                   <li className="flex items-center gap-3 text-slate-700 font-medium">

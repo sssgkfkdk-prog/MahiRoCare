@@ -24,7 +24,7 @@ export default function ContactPage() {
                  
                  <div>
                    <h4 className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Call Us</h4>
-                   <p className="text-sm font-medium">+91 95801 75145</p>
+                   <p className="text-sm font-medium">+91 90767 23600</p>
                  </div>
                  
                  <div>

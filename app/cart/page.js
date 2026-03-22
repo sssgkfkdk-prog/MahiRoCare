@@ -203,7 +203,7 @@ export default function CartPage() {
                       </div>
                       <div>
                         <label className="block text-xs font-bold text-slate-600 mb-1.5 ml-1">Phone Number</label>
-                        <input type="tel" placeholder="+91 9876543210" required value={shippingDetails.phone} onChange={e => setShippingDetails({ ...shippingDetails, phone: e.target.value })} className="w-full px-4 py-3 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl text-sm bg-slate-50 text-slate-900 font-medium transition-all outline-none" />
+                        <input type="tel" placeholder="+91 90767 23600" required value={shippingDetails.phone} onChange={e => setShippingDetails({ ...shippingDetails, phone: e.target.value })} className="w-full px-4 py-3 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl text-sm bg-slate-50 text-slate-900 font-medium transition-all outline-none" />
                       </div>
                       <div>
                         <label className="block text-xs font-bold text-slate-600 mb-1.5 ml-1">Complete Address</label>

@@ -43,7 +43,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <span className="mr-2">📞</span>
-                <span>+91 95801 75145</span>
+                <span>+91 90767 23600</span>
               </li>
               <li className="flex items-center">
                 <span className="mr-2">✉️</span>
